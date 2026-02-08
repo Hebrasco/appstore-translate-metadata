@@ -94,7 +94,6 @@ struct TranslateMetadata: AsyncParsableCommand {
     }
     
     func getLocale(_ locale: String) -> String {
-        print("is supported? \(locale)", SUPPORTED_DEEPL_LANGUAGES.contains(locale))
         if !SUPPORTED_DEEPL_LANGUAGES.contains(locale) {
             if locale == "no" { return "nb" }
             if locale.contains("-") {
