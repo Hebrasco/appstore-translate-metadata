@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  appstore-metadata-updater
+//  appstore-translate-metadata
 //
 //  Created by Daniel Bedrich on 04.02.26.
 //

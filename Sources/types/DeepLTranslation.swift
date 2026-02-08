@@ -1,6 +1,6 @@
 //
 //  DeepLTranslation 2.swift
-//  xcloc-translator
+//  appstore-translate-metadata
 //
 //  Created by Daniel Bedrich on 01.02.26.
 //

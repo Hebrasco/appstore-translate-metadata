@@ -35,7 +35,7 @@ Create a source file that looks like this. All values are optional.
 Then use it like this:
 
 ```
-USAGE: translate-metadata <bundle-id> --source-file <source-file> --source-language <source-language> --output-path <output-path> [--marketing-url <marketing-url>] [--support-url <support-url>] [--skip-whats-new] [--skip-promotional-text]
+USAGE: appstore-translate-metadata <bundle-id> --source-file <source-file> --source-language <source-language> --output-path <output-path> [--marketing-url <marketing-url>] [--support-url <support-url>] [--skip-whats-new] [--skip-promotional-text]
 
 ARGUMENTS:
   <bundle-id>             The apps bundle id to translate the matadata for.
