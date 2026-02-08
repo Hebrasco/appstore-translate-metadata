@@ -67,9 +67,33 @@ struct TranslateMetadata: AsyncParsableCommand {
             let localization = await requestLocalization(localizationId)
             let locale = getLocale(localization.attributes!.locale!)
             
-            if !SUPPORTED_DEEPL_LANGUAGES.contains(locale) { continue }
+            print("🌐 Translating '\(locale)'")
+            
+            if !SUPPORTED_DEEPL_LANGUAGES.contains(locale) {
+                print("Locale '\(locale)' not uspported by DeepL. Continuing...")
+                continue
+            }
             
             var text: [String] = []
+            
+            let isDescriptionValid = validateAttribute(attributes.description, maxCount: 4000)
+            let isKeywordsValid = validateAttribute(attributes.keywords, maxCount: 100)
+            let isPromotionalTextValid = validateAttribute(attributes.promotionalText, maxCount: 170)
+            let isWhatsNewValid = validateAttribute(attributes.whatsNew, maxCount: 4000)
+            
+            if !isDescriptionValid { print("The attribute 'description' is longer than 4000 characters.") }
+            if !isKeywordsValid { print("The attribute 'keywords' is longer than 100 characters.") }
+            if !isPromotionalTextValid { print("The attribute 'promotionalText' is longer than 170 characters.") }
+            if !isWhatsNewValid { print("The attribute 'whatsNew' is longer than 4000 characters.") }
+            
+            if
+                !isDescriptionValid ||
+                !isKeywordsValid ||
+                !isPromotionalTextValid ||
+                !isWhatsNewValid
+            {
+                print("Some attributes are invalid. Continuing...")
+            }
 
             text.append(attributes.description ?? "")
             text.append(attributes.keywords ?? "")
@@ -113,6 +137,10 @@ struct TranslateMetadata: AsyncParsableCommand {
         }
         
         return locale
+    }
+    
+    func validateAttribute(_ attribute: String?, maxCount: Int) -> Bool {
+        attribute?.count ?? 0 > 100
     }
 
     func requestApp(bundleId: String) async -> App {
