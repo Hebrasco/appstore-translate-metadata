@@ -15,7 +15,7 @@ let SUPPORTED_DEEPL_LANGUAGES: [String] = [
     "ar", "bg", "cs", "da", "de", "el", "en-GB", "en-US", "es", "es-419",
     "et", "fi", "fr", "he", "hi", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv",
     "nb", "nl", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sl", "sv",
-    "th", "tr", "uk", "vi", "zh", "zh-HANS", "zh-HANT"
+    "th", "tr", "uk", "vi", "zh", "zh-Hans", "zh-Hant"
 ]
 
 @main
@@ -43,8 +43,6 @@ struct TranslateMetadata: AsyncParsableCommand {
     }
     
     func translateMetaData() async {
-        let filemanager = FileManager.default
-        
         let url = URL(string: "file://\(sourceFile)")
         guard let url else { TranslateMetadata.exit() }
         
@@ -87,6 +85,7 @@ struct TranslateMetadata: AsyncParsableCommand {
             
             let output = "\(outputPath)/\(locale).json"
             
+            let filemanager = FileManager.default
             if !filemanager.fileExists(atPath: output) {
                 try! filemanager.createDirectory(atPath: outputPath, withIntermediateDirectories: true)
             }
@@ -95,6 +94,7 @@ struct TranslateMetadata: AsyncParsableCommand {
     }
     
     func getLocale(_ locale: String) -> String {
+        print("is supported? \(locale)", SUPPORTED_DEEPL_LANGUAGES.contains(locale))
         if !SUPPORTED_DEEPL_LANGUAGES.contains(locale) {
             if locale == "no" { return "nb" }
             if locale.contains("-") {
