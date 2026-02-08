@@ -37,7 +37,13 @@ struct TranslateMetadata: AsyncParsableCommand {
     
     @Option(name: .long, help: "The support url.")
     var supportURL: String? = nil
-
+    
+    @Flag(help: "Skip what's new.")
+    var skipWhatsNew: Bool = false
+    
+    @Flag(help: "Skip promotional text.")
+    var skipPromotionalText: Bool = false
+    
     mutating func run() async throws {
         await translateMetaData()
     }
@@ -78,9 +84,9 @@ struct TranslateMetadata: AsyncParsableCommand {
                 description: translations[0].text,
                 keywords: translations[1].text,
                 marketingURL: attributes.marketingURL ?? URL(string: marketingURL ?? ""),
-                promotionalText: translations[2].text,
+                promotionalText: skipPromotionalText ? nil : translations[2].text,
                 supportURL: attributes.supportURL ?? URL(string: supportURL ?? ""),
-                whatsNew: translations[3].text,
+                whatsNew: skipWhatsNew ? nil : translations[3].text,
             )
             
             let output = "\(outputPath)/\(locale).json"
