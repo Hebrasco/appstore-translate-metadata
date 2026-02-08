@@ -35,23 +35,28 @@ Create a source file that looks like this. All values are optional.
 Then use it like this:
 
 ```
-USAGE: translate-metadata <bundle-id> --source-file <source-file> --source-language <source-language> --output-path <output-path> [--marketing-url <marketing-url>] [--support-url <support-url>]
+USAGE: translate-metadata <bundle-id> --source-file <source-file> --source-language <source-language> --output-path <output-path> [--marketing-url <marketing-url>] [--support-url <support-url>] [--skip-whats-new] [--skip-promotional-text]
 
 ARGUMENTS:
   <bundle-id>             The apps bundle id to translate the matadata for.
 
 OPTIONS:
   --source-file <source-file>
-                          The source '.json' file containing the base meta data used for the translation.
+                          The source '.json' file containing the base meta
+                          data used for the translation.
   --source-language <source-language>
                           The source languate to translate from.
   --output-path <output-path>
-                          The path to the folder where the '.json' files should be saved.
+                          The path to the folder where the '.json' files
+                          should be saved.
   --marketing-url <marketing-url>
                           The marketing url.
   --support-url <support-url>
                           The support url.
+  --skip-whats-new        Skip what's new.
+  --skip-promotional-text Skip promotional text.
   -h, --help              Show help information.
+
 ```
 
 # Output
